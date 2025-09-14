@@ -24,7 +24,7 @@ export const HomePage = () => {
   console.log({ characters });
 
   return (
-    <main className="container mx-auto px-4 py-8">
+    <main className="container mx-auto px-4 py-8 bg-white">
       <div className="mb-6">
         <h2 className="text-2xl font-bold">Personajes de Marvel</h2>
         <div className="grid grid-cols-[repeat(auto-fit,minmax(172px,1fr))] gap-[16px] px-[48px]">

@@ -15,8 +15,8 @@ export const CharacterCard = (character: CharacterEntity) => {
       <div className="border-red-500 border-2" />
       <div className="flex flex-row justify-between items-center flex-1 px-2">
         <p className="text-white">{character.name}</p>
-        <button>
-          <img src={favoriteIconSelected} className="h-auto w-auto" />
+        <button className="flex-shrink-0">
+          <img src={favoriteIconSelected} className="h-3 w-3" />
         </button>
       </div>
     </div>

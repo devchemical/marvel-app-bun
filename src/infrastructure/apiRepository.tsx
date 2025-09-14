@@ -12,7 +12,6 @@ const basicURL = "https://gateway.marvel.com/v1/public/";
 const md5Message = timestamp + privateKey + publicKey;
 
 const md5Hash = MD5(md5Message).toString();
-console.log({ publicKey, privateKey, md5Message, md5Hash });
 
 export const apiRepository = (
   apiUrl = `${basicURL}characters?ts=1&apikey=${publicKey}&hash=${md5Hash}`
