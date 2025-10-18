@@ -1,5 +1,5 @@
 import type { ChangeEvent } from "react";
-import { useState, useCallback } from "react";
+import { useState } from "react";
 
 export const SearchBar = () => {
   const [value, setValue] = useState("");

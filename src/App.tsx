@@ -1,5 +1,4 @@
 import { BrowserRouter as Router, Routes, Route } from "react-router-dom";
-import { useState } from "react";
 import { SearchBar } from "./presentation/components/SearchBar";
 import { Header } from "./presentation/components/Header";
 import { HomePage } from "./presentation/pages/HomePage";

@@ -25,3 +25,6 @@ dist-ssr
 *.sln
 *.sw?
 PROJECT_BASIS.md
+
+tsconfig.app.tsbuildinfo
+.github
