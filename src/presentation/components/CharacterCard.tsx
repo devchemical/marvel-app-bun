@@ -1,7 +1,7 @@
 import favoriteIconSelected from "@/assets/favorite_icon_selected.svg";
 import favoriteIconUnselected from "@/assets/favorite_icon_unselected.svg";
 import type { CharacterEntity } from "../../domain/characterEntity";
-import { useFavoritesStore } from "../stores/useFavoritesStore";
+import { useFavoritesStore } from "../stores/favoritesStore";
 
 export const CharacterCard = (character: CharacterEntity) => {
   /**

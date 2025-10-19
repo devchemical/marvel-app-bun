@@ -31,9 +31,8 @@ export const HomePage = () => {
   }, []);
 
   return (
-    <main className="container mx-auto px-4 py-8 bg-white min-h-[calc(100vh-200px)]">
+    <main className="container mx-auto px-4 py-2 bg-white min-h-[calc(100vh-200px)]">
       <div className="mb-6">
-        <h2 className="text-2xl font-bold mb-2">Personajes de Marvel</h2>
         {!isLoading && !error && (
           <p className="text-gray-600 text-sm font-bold">
             {characters.length} RESULTS
