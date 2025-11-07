@@ -7,18 +7,20 @@ export const CharacterService = () => {
   const getCharacters = async (
     dbCharacterRepository: DBCharacterRepository
   ) => {
-    return await dbCharacterRepository.getCharacters();
+    return await dbCharacterRepository.getCharacters?.();
   };
 
-  //   const searchCharacters = async (
-  //     dbCharacterRepository: DBCharacterRepository,
-  //     name: string
-  //   ) => {
-  //     return await dbCharacterRepository.searchCharacters(name);
-  //   };
+  const searchCharacters = async (
+    dbCharacterRepository: DBCharacterRepository,
+    query: string
+  ) => {
+    console.log("service", query);
+
+    return await dbCharacterRepository.searchCharacters?.(query);
+  };
 
   return {
     getCharacters,
-    // searchCharacters,
+    searchCharacters,
   };
 };

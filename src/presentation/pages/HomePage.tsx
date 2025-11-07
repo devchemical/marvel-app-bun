@@ -13,20 +13,26 @@ export const HomePage = () => {
 
   const { searchQuery } = useSearchCharacterStore();
 
-  console.log("searchQuery", searchQuery);
-
   React.useEffect(() => {
     const fetchCharacters = async () => {
       setIsLoading(true);
       setError(null);
+
       try {
-        const repository = CharacterService().getCharacters(apiRepository());
-        const charactersData = await repository;
-        setCharacters(charactersData);
+        const service = CharacterService();
+        const repository = apiRepository();
+
+        const charactersData = searchQuery.trim()
+          ? await service.searchCharacters(repository, searchQuery)
+          : await service.getCharacters(repository);
+
+        charactersData && setCharacters(charactersData);
       } catch (error) {
         console.error("Error fetching characters:", error);
         setError(
-          "Error al cargar los personajes. Por favor, intenta de nuevo."
+          searchQuery.trim()
+            ? "Error al buscar personajes. Por favor, intenta de nuevo."
+            : "Error al cargar los personajes. Por favor, intenta de nuevo."
         );
       } finally {
         setIsLoading(false);
@@ -34,7 +40,7 @@ export const HomePage = () => {
     };
 
     fetchCharacters();
-  }, []);
+  }, [searchQuery]);
 
   return (
     <main className="container mx-auto px-4 py-2 bg-white min-h-[calc(100vh-200px)]">
