@@ -36,8 +36,6 @@ export const HomePage = () => {
     fetchCharacters();
   }, []);
 
-  React.useEffect(() => {}, [searchQuery]);
-
   return (
     <main className="container mx-auto px-4 py-2 bg-white min-h-[calc(100vh-200px)]">
       <div className="mb-6">

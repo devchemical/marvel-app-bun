@@ -4,17 +4,16 @@ import type { DBCharacterEntity } from "../../domain/characterEntity";
 import { useFavoritesStore } from "../stores/useFavoritesStore";
 
 export const CharacterCard = (character: DBCharacterEntity) => {
-  const isFavorite = useFavoritesStore((state) => state.isFavorite);
+  const isFavorite = useFavoritesStore((state) =>
+    state.isFavorite(character.id)
+  );
   const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
-  const isCharacterFavorite = isFavorite(character.id);
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
     e.preventDefault();
     e.stopPropagation();
     toggleFavorite(character);
   };
-
-  console.log("image url", character);
 
   return (
     <div className="flex flex-col w-[172px] h-[246px] bg-black">
@@ -29,17 +28,11 @@ export const CharacterCard = (character: DBCharacterEntity) => {
         <button
           onClick={handleToggleFavorite}
           className="cursor-pointer"
-          aria-label={
-            isCharacterFavorite ? "Eliminar de favoritos" : "Añadir a favoritos"
-          }
+          aria-label={isFavorite ? "Remove from favorites" : "Add to favorites"}
         >
           <img
-            src={
-              isCharacterFavorite
-                ? favoriteIconSelected
-                : favoriteIconUnselected
-            }
-            alt={isCharacterFavorite ? "Favorito" : "No favorito"}
+            src={isFavorite ? favoriteIconSelected : favoriteIconUnselected}
+            alt={isFavorite ? "Favorite" : "Not favorite"}
             className="h-3 w-3"
           />
         </button>
