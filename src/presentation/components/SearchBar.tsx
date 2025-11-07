@@ -1,12 +1,16 @@
 import type { ChangeEvent } from "react";
 import { useState } from "react";
+import { useSearchCharacterStore } from "../stores/useSearchCharacterStore";
 
 export const SearchBar = () => {
   const [value, setValue] = useState("");
 
+  const setQuery = useSearchCharacterStore((state) => state.setQuery);
+
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
     const newValue = e.target.value;
     setValue(newValue);
+    setQuery(newValue);
   };
 
   return (

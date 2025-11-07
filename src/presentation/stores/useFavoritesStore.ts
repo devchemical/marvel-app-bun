@@ -1,10 +1,10 @@
 import { create } from "zustand";
 import { persist } from "zustand/middleware";
-import type { CharacterEntity } from "../../domain/characterEntity";
+import type { DBCharacterEntity } from "../../domain/characterEntity";
 
 interface FavoritesInterface {
-  favorites: CharacterEntity[];
-  toggleFavorite: (character: CharacterEntity) => void;
+  favorites: DBCharacterEntity[];
+  toggleFavorite: (character: DBCharacterEntity) => void;
   isFavorite: (characterId: number) => boolean;
   getFavoritesCount: () => number;
 }
@@ -13,7 +13,7 @@ export const useFavoritesStore = create<FavoritesInterface>()(
   persist(
     (set, get) => {
       // Funciones privadas (no exportadas en la interfaz)
-      const addFavorite = (character: CharacterEntity) => {
+      const addFavorite = (character: DBCharacterEntity) => {
         const { favorites } = get();
         set({ favorites: [...favorites, character] });
       };
@@ -28,16 +28,6 @@ export const useFavoritesStore = create<FavoritesInterface>()(
         favorites: [],
 
         // Acciones públicas
-        toggleFavorite: (character: CharacterEntity) => {
-          const { isFavorite } = get();
-
-          if (isFavorite(character.id)) {
-            removeFavorite(character.id);
-          } else {
-            addFavorite(character);
-          }
-        },
-
         isFavorite: (characterId: number) => {
           const { favorites } = get();
           return favorites.some((fav) => fav.id === characterId);
@@ -46,6 +36,16 @@ export const useFavoritesStore = create<FavoritesInterface>()(
         getFavoritesCount: () => {
           const { favorites } = get();
           return favorites.length;
+        },
+
+        toggleFavorite: (character: DBCharacterEntity) => {
+          const { isFavorite } = get();
+
+          if (isFavorite(character.id)) {
+            removeFavorite(character.id);
+          } else {
+            addFavorite(character);
+          }
         },
       };
     },

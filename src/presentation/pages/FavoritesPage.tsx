@@ -1,6 +1,6 @@
 import * as React from "react";
 import { CharacterCard } from "../components/CharacterCard";
-import { useFavoritesStore } from "../stores/favoritesStore";
+import { useFavoritesStore } from "../stores/useFavoritesStore";
 
 export const FavoritesPage = () => {
   const favorites = useFavoritesStore((state) => state.favorites);

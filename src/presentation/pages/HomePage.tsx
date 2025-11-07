@@ -1,20 +1,26 @@
 import * as React from "react";
 import { CharacterCard } from "../components/CharacterCard";
-import { apiRepository } from "../../infrastructure/apiRepository";
-import type { CharacterEntity } from "../../domain/characterEntity";
-import { getCharactersUseCase } from "../../application/getCharactersUseCase";
+import { apiRepository } from "../../infrastructure/dbApiRepository";
+import type { DBCharacterEntity } from "../../domain/characterEntity";
+import { CharacterService } from "../../application/characterService";
+import { useSearchCharacters } from "../hooks/useSearchCharacters";
+import { useSearchCharacterStore } from "../stores/useSearchCharacterStore";
 
 export const HomePage = () => {
-  const [characters, setCharacters] = React.useState<CharacterEntity[]>([]);
+  const [characters, setCharacters] = React.useState<DBCharacterEntity[]>([]);
   const [isLoading, setIsLoading] = React.useState(true);
   const [error, setError] = React.useState<string | null>(null);
+
+  const { searchQuery } = useSearchCharacterStore();
+
+  console.log("searchQuery", searchQuery);
 
   React.useEffect(() => {
     const fetchCharacters = async () => {
       setIsLoading(true);
       setError(null);
       try {
-        const repository = getCharactersUseCase(apiRepository());
+        const repository = CharacterService().getCharacters(apiRepository());
         const charactersData = await repository;
         setCharacters(charactersData);
       } catch (error) {
@@ -29,6 +35,8 @@ export const HomePage = () => {
 
     fetchCharacters();
   }, []);
+
+  React.useEffect(() => {}, [searchQuery]);
 
   return (
     <main className="container mx-auto px-4 py-2 bg-white min-h-[calc(100vh-200px)]">

@@ -1,13 +1,11 @@
 import favoriteIconSelected from "@/assets/favorite_icon_selected.svg";
 import favoriteIconUnselected from "@/assets/favorite_icon_unselected.svg";
-import type { CharacterEntity } from "../../domain/characterEntity";
-import { useFavoritesStore } from "../stores/favoritesStore";
+import type { DBCharacterEntity } from "../../domain/characterEntity";
+import { useFavoritesStore } from "../stores/useFavoritesStore";
 
-export const CharacterCard = (character: CharacterEntity) => {
-  /**
-   * @todo Use hooh useFavorite instead of directly the store
-   */
-  const { isFavorite, toggleFavorite } = useFavoritesStore();
+export const CharacterCard = (character: DBCharacterEntity) => {
+  const isFavorite = useFavoritesStore((state) => state.isFavorite);
+  const toggleFavorite = useFavoritesStore((state) => state.toggleFavorite);
   const isCharacterFavorite = isFavorite(character.id);
 
   const handleToggleFavorite = (e: React.MouseEvent) => {
@@ -16,12 +14,14 @@ export const CharacterCard = (character: CharacterEntity) => {
     toggleFavorite(character);
   };
 
+  console.log("image url", character);
+
   return (
     <div className="flex flex-col w-[172px] h-[246px] bg-black">
       <img
-        src={`${character.thumbnail.path}.${character.thumbnail.extension}`}
+        src={character.image}
         alt={character.name}
-        className="w-full h-[190px] object-cover"
+        className="w-full h-[190px] object-contain"
       />
       <div className="border-red-500 border-2" />
       <div className="flex flex-row justify-between items-center flex-1 px-2">

@@ -1,7 +1,7 @@
 import { Link, useLocation } from "react-router-dom";
 import marvelLogo from "@/assets/marvel_logo.svg";
 import favoriteIcon from "@/assets/favorite_icon_selected.svg";
-import { useFavoritesStore } from "../stores/favoritesStore";
+import { useFavoritesStore } from "../stores/useFavoritesStore";
 
 export const Header = () => {
   const location = useLocation();
